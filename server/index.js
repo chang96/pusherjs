@@ -30,10 +30,10 @@ const allRegions = [
 const app = express()
 const PORT = process.env.PORT || 3000
 const pusher = new Pusher({
-    appId: "1124234",
-    key: "b691171de5f8ac605664",
-    secret: "9b22dfa2b49d99cabeb2",
-    cluster: "mt1",
+    appId: process.env.appId,
+    key: process.env.key,
+    secret: process.env.secret,
+    cluster: process.env.cluster,
     useTLS: true
   });
 (async function(){
@@ -54,8 +54,8 @@ setInterval(() => {
 }, 50000);
 
 let beamsClient = new PushNotifications({
-  instanceId: '6e70a6a0-a057-4c9d-b88d-95963f7fe209',
-  secretKey: 'A31A51C3FD12980D9F72517FA2FBD9294A7CDC66F7076C6E3FB852F9C00B49C0'
+  instanceId: process.env.instanceId,
+  secretKey: process.env.secrekey
 });
 
 // beamsClient.publishToInterests(['hello'], {

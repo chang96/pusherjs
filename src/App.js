@@ -17,13 +17,12 @@ function App() {
   const [data, updateData] = useState({message: sampleData})
   const [total, updateTotal] = useState({message: sampleData[0]})
 
-  const pusher = new Pusher('b691171de5f8ac605664', {
-    cluster: 'mt1'
+  const pusher = new Pusher(process.env.REACT_APP_KEY, {
+    cluster: process.env.REACT_APP_CLUSTER
   });
   const channel = pusher.subscribe('my-channel');
   channel.bind('my-event', function(dataFromServer) {
     updateData(data =>{
-      console.log(dataFromServer+"fghjkjhgf", data)
       return {message: data.message.splice(Number(dataFromServer.message[11]), 1, dataFromServer.message)}
     }
     )
@@ -33,7 +32,7 @@ function App() {
     
   });
   const beamsClient = new PusherPushNotifications.Client({
-    instanceId: '6e70a6a0-a057-4c9d-b88d-95963f7fe209',
+    instanceId: process.env.REACT_APP_INSTANCEID,
   })
   beamsClient.start()
   .then(() => beamsClient.getDeviceId())
